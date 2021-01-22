@@ -4,9 +4,13 @@
 // Creaiamo una select nell'html per filtrare le carte attraverso la proprietà power, per un valore che va da 1 a 5. (anche se in Magic è diverso)
 // Superpoweredbonus. E se volessi un'altra select e filtrare gli elementi attraverso la proprietà che abbiamo chiamato cardType?
 
+
+
 const fieldCodes = [
   'W', 'U', 'B', 'R', 'G'
 ]
+
+
 
 const cardTypes = [
   'terre',
@@ -17,11 +21,7 @@ const cardTypes = [
   'stregonerie'
 ]
 
-// Abbiamo creato un oggetto di oggetti, come riferimento
-// di una edizione. Se ad esempio scrivo editions['SP']
-// allora otterrò tutto un oggetto che descrive
-// con più dettagli l'edizione.
-// come oggetto di oggetti, può essere navigato solo con il for-in
+
 const editions = {
 
   'BL': {
@@ -36,8 +36,25 @@ const editions = {
 
 }
 
+
+const optionPower = [1,2,3,4,5]
+
+//Dove stamperò a schermo il nome delle cards in oggetti
 const nameOfCArds = document.getElementById('namecards')
 
+//Select nell'html a cui aggiungerò dinamicamente delle options;
+const selectPowerInPage = document.getElementsByClassName('power');
+
+
+
+
+//ARRAY DI OGGETTI CARDS
+
+// Abbiamo creato un oggetto di oggetti, come riferimento
+// di una edizione. Se ad esempio scrivo editions['SP']
+// allora otterrò tutto un oggetto che descrive
+// con più dettagli l'edizione.
+// come oggetto di oggetti, può essere navigato solo con il for-in
 
 const cards = [{
 
@@ -118,7 +135,7 @@ const cards = [{
       story: 'Gli hanno appioppato la forza.',
 
       score: {
-        power: 5,  // r
+        power: 5,
         toughness: 3
       }
 
@@ -137,7 +154,7 @@ const cards = [{
         ],
       },
 
-      picture: 'images/g.png',  // da inserire immagine
+      picture: 'images/g.png',
       cardType: cardTypes[5],
       cardObject: 'Bear',
 
@@ -147,7 +164,7 @@ const cards = [{
       story: 'Nato da un uovo',
 
       score: {
-        power: 7,  // r
+        power: 7,
         toughness: 7
       }
 
@@ -185,7 +202,7 @@ const cards = [{
 ]
 console.log(cards);
 
-//FUNZIONE PER FILTRARE 'POWER' DALL'ARRAY DI OGGETTI
+//FUNZIONE PER FILTRARE 'POWER' DA UN ARRAY DI OGGETTI
 
 function PowerCards(power,array){
   return array.filter((element) => {
@@ -195,6 +212,8 @@ function PowerCards(power,array){
 
 //prova funzione
 console.log(PowerCards(5 , cards));
+
+
 
 
 
@@ -210,7 +229,43 @@ function inPage(pageElement, arrayName){
 
   `
 });
+};
 
+//VISUALIZZATI CARDSNAME;
+inPage(nameOfCArds,cards);
+
+
+
+
+//
+//
+// //popolo l'array filteredPower con i valori di powerCard
+// //in modo che non si ripetano piu di una volta
+
+// cards.forEach((item) => {
+//   if (!filteredPower.includes(item.score.power)) {
+//     filteredPower.push(item.score.power);
+//   }
+// });
+// console.log(filteredPower);
+
+
+
+
+
+//FUNZIONE CHE MI PERMETTA DI AGGIUNGERE OPTIONS ALLA SELECT(OPZIONI SCELTA IN PAGINA)
+
+function addOptionsToSelect(elementPage , arrayName){
+arrayName.forEach((item) => {
+const powersCard = item;
+
+elementPage.innerHTML +=
+
+`
+<option value ="${powersCard}">${powersCard}</option>
+
+`
+});
 }
 
-inPage(nameOfCArds,cards);
+addOptionsToSelect(selectPowerInPage,optionPower);
