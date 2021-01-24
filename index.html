@@ -3,22 +3,25 @@
   <head>
     <link rel="stylesheet" href="css/style.css">
     <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/script.js" charset="utf-8"></script>
     <title></title>
   </head>
   <body>
 
+
 <div class="container">
 
 <label for="power"></label>
-<select class="power" name="power">
-  <option value="">SCOPRI IL VALORE</option>
+<select class="power" id="selectoption" name="power">
+  <option value="default">SCEGLI IL VALORE</option>
 
 </select>
 
 
 
 
-
+<!-- DOVE VENGONO STAMPATI NOMI E RISULTATI CARTE -->
   <div class="box-name-cards">
 
     <ul id="namecards">
@@ -27,9 +30,24 @@
 
   </div>
 
+
+  <div class="card-selected">
+
+
+    <ul id="type-selected">
+
+
+    </ul>
+
+
+  </div>
+
+
+
+
 </div>
 
 
-    <script src="js/script.js" charset="utf-8"></script>
+
   </body>
 </html>

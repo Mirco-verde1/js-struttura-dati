@@ -5,6 +5,10 @@
 // Superpoweredbonus. E se volessi un'altra select e filtrare gli elementi attraverso la proprietà che abbiamo chiamato cardType?
 
 
+$(document).ready(function() {
+
+
+
 
 const fieldCodes = [
   'W', 'U', 'B', 'R', 'G'
@@ -43,10 +47,13 @@ const optionPower = [1,2,3,4,5]
 const nameOfCArds = document.getElementById('namecards')
 
 //Select nell'html a cui aggiungerò dinamicamente delle options;
-const selectPowerInPage = document.getElementsByClassName('power');
+const selectPowerInPage = document.getElementById('selectoption');
 
+//Prendo la select in html anche tramite jquery per l'event change;
+const selectOption = $('#selectoption');
 
-
+//posizione in cui visualizzerò i tipi di card scelte
+const typeSelected = document.getElementById('type-selected')
 
 //ARRAY DI OGGETTI CARDS
 
@@ -269,3 +276,56 @@ elementPage.innerHTML +=
 }
 
 addOptionsToSelect(selectPowerInPage,optionPower);
+
+
+
+
+//FUNZIONI DI CHANGE PER SELEZIONARE DIVERSE OPZIONI NELLA SELECT
+
+selectOption.change(function() {
+
+  typeSelected.innerHTML = ''; //ad ogni change il contenuto si azzera,in modo che le scelte non si sommino;
+
+  const userChoice = $(this).val()
+
+  console.log(userChoice); //visualizzo la scelta,mi assicuro che il change funzioni
+
+
+  let filteredArray; //preparo una variabile vuota che avrà come item la scelta dell'utente;
+
+
+
+  if(userChoice !== 'default') {
+
+    filteredArray = cards.filter((element) => {
+
+      return element.score.power === userChoice
+    });
+  }
+
+  else {
+    // Se typeSelected è uguale a Default, quindi NON vogliamo filtrare
+    // assegno in filteredArray tutto l'array CARDS.
+    filteredArray = cards;
+
+  }
+
+  console.log(filteredArray);
+
+
+filteredArray.forEach((item) => {
+
+  typeSelected.innerHTML +=
+
+  `
+  <li> ${item} </li>
+  `
+
+});
+
+});
+
+
+
+//END DOCUMENT READY
+});
