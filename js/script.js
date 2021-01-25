@@ -10,84 +10,86 @@ $(document).ready(function() {
 
 
 
-const fieldCodes = [
-  'W', 'U', 'B', 'R', 'G'
-]
+  const fieldCodes = [
+    'W', 'U', 'B', 'R', 'G'
+  ]
 
 
 
-const cardTypes = [
-  'terre',
-  'creature',
-  'incantesimi',
-  'artefatti',
-  'instantanei',
-  'stregonerie'
-]
+  const cardTypes = [
+    'terre',
+    'creature',
+    'incantesimi',
+    'artefatti',
+    'instantanei',
+    'stregonerie'
+  ]
 
 
-const editions = {
+  const editions = {
 
-  'BL': {
+    'BL': {
       edition: 'Boolean',
       rarity: 'blue'
-  },
+    },
 
-  'SP': {
+    'SP': {
       edition: 'Special',
       rarity: 'red'
+    }
+
   }
 
-}
+
+  const optionPower = [1,2,3,4,5]
+
+  //Dove stamperò a schermo il nome delle cards in oggetti
+  const nameOfCArds = document.getElementById('namecards')
+
+  //Select nell'html a cui aggiungerò dinamicamente delle options;
+  const selectPowerInPage = document.getElementById('selectoption');
+
+  //Prendo la select in html anche tramite jquery per l'event change;
+  const selectOption = $('#selectoption');
+
+  //posizione in cui visualizzerò i tipi di card  in base al 'power' scelte
+  const powerSelected = document.getElementById('type-selected')
 
 
-const optionPower = [1,2,3,4,5]
+  const userTypeSelected = $('#user-type-selected');
+  //ARRAY DI OGGETTI CARDS
 
-//Dove stamperò a schermo il nome delle cards in oggetti
-const nameOfCArds = document.getElementById('namecards')
+  // Abbiamo creato un oggetto di oggetti, come riferimento
+  // di una edizione. Se ad esempio scrivo editions['SP']
+  // allora otterrò tutto un oggetto che descrive
+  // con più dettagli l'edizione.
+  // come oggetto di oggetti, può essere navigato solo con il for-in
 
-//Select nell'html a cui aggiungerò dinamicamente delle options;
-const selectPowerInPage = document.getElementById('selectoption');
+  const cards = [{
 
-//Prendo la select in html anche tramite jquery per l'event change;
-const selectOption = $('#selectoption');
+    cardName: 'Grizzly Bears',
 
-//posizione in cui visualizzerò i tipi di card scelte
-const typeSelected = document.getElementById('type-selected')
+    cost: {
+      genericCostNumber: 1,
+      costFields: [
+        fieldCodes[0],
+        fieldCodes[2]
+      ],
+    },
 
-//ARRAY DI OGGETTI CARDS
+    picture: 'images/i.png',
+    cardType: cardTypes[1],
+    cardObject: 'Bear',
 
-// Abbiamo creato un oggetto di oggetti, come riferimento
-// di una edizione. Se ad esempio scrivo editions['SP']
-// allora otterrò tutto un oggetto che descrive
-// con più dettagli l'edizione.
-// come oggetto di oggetti, può essere navigato solo con il for-in
+    editionType: editions['BL'],
 
-const cards = [{
+    description: 'Lorem ipsum',
+    story: 'Naltro Lorem Ipsum',
 
-  cardName: 'Grizzly Bears',
-
-  cost: {
-    genericCostNumber: 1,
-    costFields: [
-      fieldCodes[0],
-      fieldCodes[2]
-    ],
-  },
-
-  picture: 'images/i.png',
-  cardType: cardTypes[1],
-  cardObject: 'Bear',
-
-  editionType: editions['BL'],
-
-  description: 'Lorem ipsum',
-  story: 'Naltro Lorem Ipsum',
-
-  score: {
-    power: 2,
-    toughness: 2
-  }
+    score: {
+      power: 2,
+      toughness: 2
+    }
 
   },
   {
@@ -116,95 +118,95 @@ const cards = [{
       toughness: 3
     }
 
+  },
+
+
+
+  {
+
+    cardName: 'Ninja',
+
+    cost: {
+      genericCostNumber: 3,
+      costFields: [
+        fieldCodes[1],
+        fieldCodes[4]
+      ],
     },
 
+    picture: 'images/g.png',
+    cardType: cardTypes[0],
+    cardObject: 'Bear',
+
+    editionType: editions['SP'],
+
+    description: 'Il ninja mena ragà!',
+    story: 'Gli hanno appioppato la forza.',
+
+    score: {
+      power: 5,
+      toughness: 3
+    }
+
+  },
 
 
-    {
+  {
 
-      cardName: 'Ninja',
+    cardName: 'Dragon',
 
-      cost: {
-        genericCostNumber: 3,
-        costFields: [
-          fieldCodes[1],
-          fieldCodes[4]
-        ],
-      },
+    cost: {
+      genericCostNumber: 4,
+      costFields: [ // colors array con riferimento a fieldCodes
+        fieldCodes[0],
+        fieldCodes[2]
+      ],
+    },
 
-      picture: 'images/g.png',
-      cardType: cardTypes[0],
-      cardObject: 'Bear',
+    picture: 'images/g.png',
+    cardType: cardTypes[5],
+    cardObject: 'Bear',
 
-      editionType: editions['SP'],
+    editionType: editions['SP'],
 
-      description: 'Il ninja mena ragà!',
-      story: 'Gli hanno appioppato la forza.',
+    description: 'Forte forte!',
+    story: 'Nato da un uovo',
 
-      score: {
-        power: 5,
-        toughness: 3
-      }
+    score: {
+      power: 7,
+      toughness: 7
+    }
 
-      },
-
-
-    {
-
-      cardName: 'Dragon',
-
-      cost: {
-        genericCostNumber: 4,
-        costFields: [ // colors array con riferimento a fieldCodes
-          fieldCodes[0],
-          fieldCodes[2]
-        ],
-      },
-
-      picture: 'images/g.png',
-      cardType: cardTypes[5],
-      cardObject: 'Bear',
-
-      editionType: editions['SP'],
-
-      description: 'Forte forte!',
-      story: 'Nato da un uovo',
-
-      score: {
-        power: 7,
-        toughness: 7
-      }
-
-      },
+  },
 
 
-    {
+  {
 
-      cardName: 'Superman',
+    cardName: 'Superman',
 
-      cost: {
-        genericCostNumber: 3,
-        costFields: [
-          fieldCodes[3],
-          fieldCodes[4]
-        ],
-      },
+    cost: {
+      genericCostNumber: 3,
+      costFields: [
+        fieldCodes[3],
+        fieldCodes[4]
+      ],
+    },
 
-      picture: 'images/g.png',
-      cardType: cardTypes[1],
-      cardObject: 'Bear',
+    picture: 'images/g.png',
+    cardType: cardTypes[1],
+    cardObject: 'Bear',
 
-      editionType: editions['SP'],
+    editionType: editions['SP'],
 
-      description: 'Spaziale!',
-      story: 'Lorem ipsum dolor ',
+    description: 'Spaziale!',
+    story: 'Lorem ipsum dolor ',
 
-      score: {
-        power: 5,
-        toughness: 4
-      }
+    score: {
+      power: 5,
+      toughness: 4
+    }
 
-      }
+  }
 
 ]
 console.log(cards);
@@ -232,10 +234,10 @@ function inPage(pageElement, arrayName){
 
     pageElement.innerHTML +=
     `
-  <li>${item.cardName}</li>
+    <li>${item.cardName}</li>
 
-  `
-});
+    `
+  });
 };
 
 //VISUALIZZATI CARDSNAME;
@@ -244,35 +246,19 @@ inPage(nameOfCArds,cards);
 
 
 
-//
-//
-// //popolo l'array filteredPower con i valori di powerCard
-// //in modo che non si ripetano piu di una volta
-
-// cards.forEach((item) => {
-//   if (!filteredPower.includes(item.score.power)) {
-//     filteredPower.push(item.score.power);
-//   }
-// });
-// console.log(filteredPower);
-
-
-
-
-
 //FUNZIONE CHE MI PERMETTA DI AGGIUNGERE OPTIONS ALLA SELECT(OPZIONI SCELTA IN PAGINA)
 
 function addOptionsToSelect(elementPage , arrayName){
-arrayName.forEach((item) => {
-const powersCard = item;
+  arrayName.forEach((item) => {
+    const powersCard = item;
 
-elementPage.innerHTML +=
+    elementPage.innerHTML +=
 
-`
-<option value ="${powersCard}">${powersCard}</option>
+    `
+    <option value ="${powersCard}">${powersCard}</option>
 
-`
-});
+    `
+  });
 }
 
 addOptionsToSelect(selectPowerInPage,optionPower);
@@ -284,7 +270,7 @@ addOptionsToSelect(selectPowerInPage,optionPower);
 
 selectOption.change(function() {
 
-  typeSelected.innerHTML = ''; //ad ogni change il contenuto si azzera,in modo che le scelte non si sommino;
+  powerSelected.innerHTML = ''; //ad ogni change il contenuto si azzera,in modo che le scelte non si sommino;
 
   const userChoice = $(this).val()
 
@@ -297,31 +283,34 @@ selectOption.change(function() {
 
   if(userChoice !== 'default') {
 
-    filteredArray = cards.filter((element) => {
+    filteredArray = cards.filter((element) => {  // TODO: array non prende i valori
 
       return element.score.power === userChoice
     });
   }
 
   else {
-    // Se typeSelected è uguale a Default, quindi NON vogliamo filtrare
+    // Se typeSelected è uguale a Default
     // assegno in filteredArray tutto l'array CARDS.
-    filteredArray = cards;
+    filteredArray = cards.filter((element) => {
+
+      return element.cardName;
+    })
 
   }
 
   console.log(filteredArray);
 
 
-filteredArray.forEach((item) => {
+  filteredArray.forEach((item) => {
 
-  typeSelected.innerHTML +=
+    powerSelected.innerHTML +=
 
-  `
-  <li> ${item} </li>
-  `
+    `
+    <li> ${item} </li>
+    `
 
-});
+  });
 
 });
 
