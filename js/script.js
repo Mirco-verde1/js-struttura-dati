@@ -272,7 +272,7 @@ selectOption.change(function() {
 
   powerSelected.innerHTML = ''; //ad ogni change il contenuto si azzera,in modo che le scelte non si sommino;
 
-  const userChoice = $(this).val()
+  const userChoice = parseInt($(this).val());
 
   console.log(userChoice); //visualizzo la scelta,mi assicuro che il change funzioni
 
@@ -283,7 +283,7 @@ selectOption.change(function() {
 
   if(userChoice !== 'default') {
 
-    filteredArray = cards.filter((element) => {  // TODO: array non prende i valori
+    filteredArray = cards.filter((element) => {  
 
       return element.score.power === userChoice
     });
@@ -307,7 +307,7 @@ selectOption.change(function() {
     powerSelected.innerHTML +=
 
     `
-    <li> ${item} </li>
+    <li> ${item.cardName} </li>
     `
 
   });
