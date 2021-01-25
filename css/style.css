@@ -3,13 +3,25 @@
   width: 200px;
   height: 200px;
   border: 2px solid black;
+  margin: 0 auto;
 }
 
+.cards-list span {
+  text-align: center;
+}
 
 #type-selected, #user-type-selected{
-
+   float: left;
     width: 200px;
     height: 200px;
     border: 2px solid black;
+    margin: 0 auto;
 
+}
+
+.select{
+
+  display: inline-block;
+  width: auto;
+  height: 50px;
 }

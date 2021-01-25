@@ -17,12 +17,12 @@ $(document).ready(function() {
 
 
   const cardTypes = [
-    'terre',
-    'creature',
-    'incantesimi',
-    'artefatti',
-    'instantanei',
-    'stregonerie'
+    'Terre',
+    'Creature',
+    'Incantesimi',
+    'Artefatti',
+    'Instantanei',
+    'Stregonerie'
   ]
 
 
@@ -49,14 +49,20 @@ $(document).ready(function() {
   //Select nell'html a cui aggiungerò dinamicamente delle options;
   const selectPowerInPage = document.getElementById('selectoption');
 
-  //Prendo la select in html anche tramite jquery per l'event change;
+  //Select nell'html per la scelta del tipo,a cui aggiungo dinamicamentedelle options
+  const selectUserType = document.getElementById('type-option');
+
+  //Prendo la select 'scegli il valore' in html anche tramite jquery per l'event change;
   const selectOption = $('#selectoption');
+
+  //Prendo la select 'scegi il tipo' in html anche tramite jquery per l'event change;
+  const selectType = $('#type-option');
 
   //posizione in cui visualizzerò i tipi di card  in base al 'power' scelte
   const powerSelected = document.getElementById('type-selected')
 
 
-  const userTypeSelected = $('#user-type-selected');
+  const userTypeSelected = document.getElementById('user-type-selected');
   //ARRAY DI OGGETTI CARDS
 
   // Abbiamo creato un oggetto di oggetti, come riferimento
@@ -87,7 +93,7 @@ $(document).ready(function() {
     story: 'Naltro Lorem Ipsum',
 
     score: {
-      power: 2,
+      power: 3,
       toughness: 2
     }
 
@@ -144,7 +150,7 @@ $(document).ready(function() {
     story: 'Gli hanno appioppato la forza.',
 
     score: {
-      power: 5,
+      power: 1,
       toughness: 3
     }
 
@@ -206,6 +212,92 @@ $(document).ready(function() {
       toughness: 4
     }
 
+  },
+
+  {
+
+    cardName: 'Pippo',
+
+    cost: {
+      genericCostNumber: 3,
+      costFields: [
+        fieldCodes[3],
+        fieldCodes[4]
+      ],
+    },
+
+    picture: 'images/g.png',
+    cardType: cardTypes[3],
+    cardObject: 'Bear',
+
+    editionType: editions['SP'],
+
+    description: 'Ammazza o!',
+    story: 'Lorem ipsum dolor ',
+
+    score: {
+      power: 2,
+      toughness: 4
+    }
+
+  },
+
+
+  {
+
+    cardName: 'Pluto',
+
+    cost: {
+      genericCostNumber: 3,
+      costFields: [
+        fieldCodes[3],
+        fieldCodes[4]
+      ],
+    },
+
+    picture: 'images/g.png',
+    cardType: cardTypes[5],
+    cardObject: 'Bear',
+
+    editionType: editions['SP'],
+
+    description: 'Ammazza o!',
+    story: 'Lorem ipsum dolor ',
+
+    score: {
+      power: 4,
+      toughness: 4
+    }
+
+  },
+
+
+  {
+
+    cardName: 'Aldair',
+
+    cost: {
+      genericCostNumber: 3,
+      costFields: [
+        fieldCodes[3],
+        fieldCodes[4]
+      ],
+    },
+
+    picture: 'images/g.png',
+    cardType: cardTypes[4],
+    cardObject: 'Bear',
+
+    editionType: editions['SP'],
+
+    description: 'Ammazza o!',
+    story: 'Lorem ipsum dolor ',
+
+    score: {
+      power: 4,
+      toughness: 4
+    }
+
   }
 
 ]
@@ -246,6 +338,7 @@ inPage(nameOfCArds,cards);
 
 
 
+
 //FUNZIONE CHE MI PERMETTA DI AGGIUNGERE OPTIONS ALLA SELECT(OPZIONI SCELTA IN PAGINA)
 
 function addOptionsToSelect(elementPage , arrayName){
@@ -261,12 +354,16 @@ function addOptionsToSelect(elementPage , arrayName){
   });
 }
 
-addOptionsToSelect(selectPowerInPage,optionPower);
+
+
+addOptionsToSelect(selectPowerInPage,optionPower);//Aggiunte options nella select 'scegli il valore'
+addOptionsToSelect(selectUserType,cardTypes);//Aggiunte options nella select 'scegli il tipo'
 
 
 
 
-//FUNZIONI DI CHANGE PER SELEZIONARE DIVERSE OPZIONI NELLA SELECT
+
+//-------------------------->>> FUNZIONI DI CHANGE PER SELEZIONARE DIVERSE OPZIONI NELLA SELECT 'SCEGLI IL VALORE'<<<----------------------------------------------------
 
 selectOption.change(function() {
 
@@ -283,23 +380,24 @@ selectOption.change(function() {
 
   if(userChoice !== 'default') {
 
-    filteredArray = cards.filter((element) => {  
+        filteredArray = cards.filter((element) => {
 
-      return element.score.power === userChoice
-    });
+          return element.score.power === userChoice
+        });
   }
 
   else {
     // Se typeSelected è uguale a Default
     // assegno in filteredArray tutto l'array CARDS.
-    filteredArray = cards.filter((element) => {
+  filteredArray = cards;
 
-      return element.cardName;
-    })
 
   }
 
   console.log(filteredArray);
+
+
+
 
 
   filteredArray.forEach((item) => {
@@ -307,12 +405,60 @@ selectOption.change(function() {
     powerSelected.innerHTML +=
 
     `
-    <li> ${item.cardName} </li>
+    <li class = select> La scelta è ${item.cardName} </li>
     `
 
   });
 
 });
+
+
+
+//-------------------------->>> FUNZIONI DI CHANGE PER SELEZIONARE DIVERSE OPZIONI NELLA SELECT 'SCEGLI IL TIPO'<<<----------------------------------------------------
+
+selectType.change(function(){
+userTypeSelected.innerHTML = ''; //In modo che ad ogni change riparta da zero e i risultati non si sommino
+
+let typeUserChoice = $(this).val(); //prendo la scelta dell'utente
+
+
+
+
+let filteredTypeArray; //preparo una variabile vuota che avrà come item la scelta dell'utente;
+
+if (typeUserChoice !== 'default') {
+
+  filteredTypeArray = cards.filter((element) => {
+
+  return element.cardType === typeUserChoice;
+  })
+
+}else {
+
+  return filteredTypeArray = cards.cardName;
+}
+
+//
+// console.log(filteredTypeArray);
+
+
+  filteredTypeArray.forEach((item) => {
+
+  userTypeSelected.innerHTML +=
+
+    `
+    <li class = select> Il tipo di carta è ${item.cardName} </li>
+    `
+
+  });
+})
+
+
+
+
+
+
+
 
 
 
